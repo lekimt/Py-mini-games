@@ -1,0 +1,95 @@
+# Short functions to practice loops, lists, etc.
+
+import math
+import random
+
+# ------------- TRUE if is integer (including decimal part ".0"
+# -------------  FASLE if has decimal part that is not ".0"
+def is_int(x):
+    num = x - int(x)
+    if abs(num) > 0:
+        return False
+    else:
+        return True
+
+# -------------  Sums the digits of a number n
+def digit_sum(n):
+    length = len(str(n))
+    x = 10
+    num = 0
+    for digit in range(1,length+1):
+        num += (n % x**digit) / (x**(digit-1))
+    return num
+
+# -------------  Prime number or no?
+def is_prime(x):
+    if x == 0 or x == 1:
+        return False
+    for n in range(2,abs(x)):
+        if x%n == 0:
+            print "false"
+            return False
+            break
+    else:
+        print "true"
+        return True
+
+# -------------  Reverse the word
+def reverse(text):
+    rev = []
+    for c in text:
+        rev.insert(0,c)
+    rev = "".join(rev)
+    return rev
+
+# -------------  Remove vowels from the word
+def anti_vowel(text):
+    word = []
+    vowels = ['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U']
+    for c in text:
+        for v in vowels:
+            if c == v:
+                break
+        else:
+            word.append(c)
+    word = "".join(word)
+    return word
+
+# ------------- Censors WORD from TEXT
+def censor(text, word):
+    asterik = len(word) * "*"
+    sentence = text.split()
+    censor_sent = []
+    for w in sentence:
+        if w == word:
+            censor_sent.append(asterik)
+        else:
+            censor_sent.append(w)
+    censor_sent = " ".join(censor_sent)
+    return censor_sent
+
+# ------------- Remove duplicates from list
+def remove_duplicates(lst):
+    no_dupes = []
+    for l in lst:
+        if l not in no_dupes:
+            no_dupes.append(l)
+    return no_dupes
+
+# ------------- Calculates the median of a list
+def median(lst):
+    sortlst = sorted(lst)
+    length = len(sortlst)
+    mid = length/2
+    # if even number of numbers
+    if length%2 == 0:
+        a = sortlst[mid]
+        b = sortlst[mid-1]
+        c = (a+b)/2.0
+        return c
+    # else odd number of numbers
+    else:
+        return sortlst[mid]
+
+median([7,12,3,1,6])
+median([7,3,1,4])
