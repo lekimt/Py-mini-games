@@ -1,0 +1,51 @@
+# Simple text-based Battleship 5x5 grid
+
+from random import randint
+
+# init board
+board = []
+
+for x in range(0, 5):
+    board.append(["O"] * 5)
+
+# print board
+def print_board(board):
+    for row in board:
+        print " ".join(row)
+
+print_board(board)
+
+# random location for ship
+def random_row(board):
+    return randint(0, len(board) - 1)
+
+def random_col(board):
+    return randint(0, len(board[0]) - 1)
+
+ship_row = random_row(board)
+ship_col = random_col(board)
+
+# play
+play = 1
+turn = 1
+
+while play == 1:
+    guess_row = int(raw_input("\nGuess Row: "))
+    guess_col = int(raw_input("Guess Col: "))
+
+    if guess_row == ship_row and guess_col == ship_col:
+        print "Congratulations! You sunk my battleship!"
+        play == 0
+        break
+    else:
+        if guess_row not in range(5) or guess_col not in range(5):
+            print "Oops, that's not even in the ocean."
+        elif(board[guess_row][guess_col] == "X"):
+            print "You guessed that one already."
+        else:
+            print "You missed my battleship!"
+            board[guess_row][guess_col] = "X"
+        print "\nTurn ", turn + 1
+        turn += 1
+
+        print_board(board)
